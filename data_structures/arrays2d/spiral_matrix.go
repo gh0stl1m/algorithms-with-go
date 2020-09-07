@@ -17,7 +17,7 @@ func PrintSpiralMatrix(matrix [][]uint) {
 		}
 
 		for i := firstRow + 1; i <= lastRow; i++ {
-			fmt.Println(matrix[i][firstColumn])
+			fmt.Println(matrix[i][lastColumn])
 		}
 
 		for i := lastColumn - 1; i >= firstColumn; i-- {
