@@ -51,3 +51,23 @@ func (spl *SimpleLinkedList) Display() {
 	}
 	fmt.Println()
 }
+
+// Problem: Remove the Kn element from a linked list
+
+// DeleteKnElement Remove the Kn elemnt given a linked list
+func DeleteKnElement(list *SimpleLinkedList, elemPos uint) {
+	var slowPtr *Node = list.Head
+	var fastPtr *Node = list.Head
+
+	for elemPos > 0 {
+		fastPtr = fastPtr.Next
+		elemPos--
+	}
+
+	for fastPtr.Next != nil {
+		slowPtr = slowPtr.Next
+		fastPtr = fastPtr.Next
+	}
+
+	slowPtr.Next = slowPtr.Next.Next
+}
