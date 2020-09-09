@@ -1,7 +1,5 @@
 package arrays1d
 
-import "fmt"
-
 // Problem: Find longest sequence of 1’s with one flip in an
 //          Array composed by 0s and 1s
 
@@ -31,8 +29,6 @@ func mapOnesValues(arr []uint) []uint {
 			sequenceOnesTotal = 0
 		}
 	}
-
-	fmt.Println("Arr mapped: ", arrMapped)
 
 	return arrMapped
 }

@@ -1,5 +1,9 @@
 package hashmap
 
+import (
+	"strings"
+)
+
 // Entity reprensents the element inside the hashmap
 type Entity struct {
 	Key   uint
@@ -56,6 +60,8 @@ func (ht *HashTable) getHash(key uint) uint {
 	return key % ht.Size
 }
 
+// Problem: Given an array with numbers, find the unique one
+
 // FindUniqueNumber search the unique value in an array
 func FindUniqueNumber(array []int) int {
 	var numberCounter map[int]int = make(map[int]int, len(array))
@@ -72,4 +78,36 @@ func FindUniqueNumber(array []int) int {
 	}
 
 	return uniqueNumber
+}
+
+// Problem: Key phrase problem TF-IDF find the most important word
+//          excluding the not relevant words
+
+// GetMostRelevantWord returns the most important word given a phrase
+func GetMostRelevantWord(phrase string, wordsToExclude []string) string {
+	var mostFrequentWord string
+	var mostFrequentWordTimes int = 0
+	var wordsFrecuency map[string]int = make(map[string]int)
+	var textSplitted []string = strings.Split(phrase, " ")
+
+	for _, word := range textSplitted {
+		if !contains(word, wordsToExclude) {
+			wordsFrecuency[word]++
+			if wordsFrecuency[word] > mostFrequentWordTimes {
+				mostFrequentWord = word
+				mostFrequentWordTimes = wordsFrecuency[word]
+			}
+		}
+	}
+
+	return mostFrequentWord
+}
+
+func contains(word string, source []string) bool {
+	for _, value := range source {
+		if word == value {
+			return true
+		}
+	}
+	return false
 }
