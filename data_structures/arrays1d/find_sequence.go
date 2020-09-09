@@ -7,8 +7,6 @@ import "fmt"
 
 // FindLongestSequence returns the longest sequence
 func FindLongestSequence(arr []uint) uint {
-	fmt.Println("Array getted: ", arr)
-
 	onesMappedArr := mapOnesValues(arr)
 
 	return getMaxSequence(onesMappedArr)
@@ -17,8 +15,6 @@ func FindLongestSequence(arr []uint) uint {
 func mapOnesValues(arr []uint) []uint {
 	var arrMapped []uint
 	var sequenceOnesTotal uint = 0
-
-	fmt.Println("Arr len: ", len(arr))
 
 	for i := 0; i < len(arr); i++ {
 		if arr[i] == 1 {

@@ -52,7 +52,7 @@ func (spl *SimpleLinkedList) Display() {
 	fmt.Println()
 }
 
-// Problem: Remove the Kn element from a linked list
+// Problem: Remove the Kn element from the end of the linked list
 
 // DeleteKnElement Remove the Kn elemnt given a linked list
 func DeleteKnElement(list *SimpleLinkedList, elemPos uint) {
