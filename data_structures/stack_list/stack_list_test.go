@@ -25,3 +25,19 @@ func TestStackList(t *testing.T) {
 		t.Error("The stack must be empty")
 	}
 }
+
+// Problem: Word distance
+func TestWordDistance(t *testing.T) {
+	// Arrange
+	var dictionary []string = []string{"hot", "dot", "dog", "lot", "log", "cog"}
+	var startWord string = "hot"
+	var endWord string = "cog"
+
+	// Act
+	isPathFound := FindWordsPath(dictionary, startWord, endWord, 3)
+
+	// Asserts
+	if !isPathFound {
+		t.Error("The path must be found")
+	}
+}

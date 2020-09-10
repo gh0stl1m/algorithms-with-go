@@ -49,3 +49,49 @@ func (sa *StackArray) isFull() bool {
 func (sa *StackArray) isEmpty() bool {
 	return sa.Top == -1
 }
+
+// FindWordsPath retrieve true if there's a path between strtd and endword
+func FindWordsPath(dictionary []string, startWord string, endWord string, wordDistance uint) bool {
+	var isPathFound bool
+	var visitedDic []bool = make([]bool, len(dictionary))
+	var stackPath *StackArray = new(StackArray)
+	stackPath = stackPath.Init(uint(len(dictionary)))
+	stackPath.Push(startWord)
+
+	for !stackPath.isEmpty() {
+		lastWord := stackPath.Pop()
+
+		if getWordDistance(wordDistance, startWord, endWord) == 0 {
+			stackPath.Push(lastWord)
+			isPathFound = true
+			break
+		}
+
+		for pos := range dictionary {
+			if visitedDic[pos] == true {
+				continue
+			}
+
+			distance := getWordDistance(wordDistance, lastWord.(string), dictionary[pos])
+			if distance == 1 {
+				visitedDic[pos] = true
+				stackPath.Push(lastWord)
+				stackPath.Push(dictionary[pos])
+			}
+
+		}
+	}
+
+	return isPathFound
+}
+
+func getWordDistance(distance uint, word1 string, word2 string) uint {
+	var wordDistance uint = distance
+	for pos := range word1 {
+		if word1[pos] == word2[pos] {
+			wordDistance--
+		}
+	}
+
+	return wordDistance
+}
