@@ -52,3 +52,40 @@ func (qa *QueueArray) isFull() bool {
 func (qa *QueueArray) isEmpty() bool {
 	return qa.Front == -1 || qa.Front > qa.Rear
 }
+
+// Problem: Friend circle
+
+// FindFriendsCircle retrieves the friends circles given a matrix of connection
+func FindFriendsCircle(connections [][]uint) [][]int {
+	var listOfCircles [][]int
+	var visitedConn []bool = make([]bool, len(connections))
+
+	for pos := range connections {
+		if visitedConn[pos] == true {
+			continue
+		}
+
+		visitedConn[pos] = true
+
+		var listOfFriends []int
+		var circleQueue *QueueArray = new(QueueArray)
+		circleQueue = circleQueue.Init(uint(len(connections)))
+		circleQueue.Queue(pos)
+
+		for !circleQueue.isEmpty() {
+			userID := circleQueue.Dequeue()
+			listOfFriends = append(listOfFriends, userID.(int))
+
+			for friendID := range connections[pos] {
+				if connections[userID.(int)][friendID] == 1 && !visitedConn[friendID] {
+					circleQueue.Queue(friendID)
+					visitedConn[friendID] = true
+				}
+			}
+		}
+
+		listOfCircles = append(listOfCircles, listOfFriends)
+	}
+
+	return listOfCircles
+}
