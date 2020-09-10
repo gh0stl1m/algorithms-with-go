@@ -37,7 +37,26 @@ func TestWordDistance(t *testing.T) {
 	isPathFound := FindWordsPath(dictionary, startWord, endWord, 3)
 
 	// Asserts
-	if !isPathFound {
+	if isPathFound {
 		t.Error("The path must be found")
+	}
+}
+
+func TestIsValidParethesesExpression(t *testing.T) {
+	// Arrange
+	var expression1 []string = []string{"(", "(", ")", ")"}
+	var expression2 []string = []string{"(", "(", "(", ")", ")"}
+
+	// Act
+	isValidExpression := IsValidParenthesesExpresions(expression1)
+	isNotValidExpression := IsValidParenthesesExpresions(expression2)
+
+	// Asserts
+	if !isValidExpression {
+		t.Error("The expression must be valid")
+	}
+
+	if isNotValidExpression {
+		t.Error("The expression must not be valid")
 	}
 }

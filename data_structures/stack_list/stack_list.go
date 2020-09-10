@@ -95,3 +95,33 @@ func getWordDistance(distance uint, word1 string, word2 string) uint {
 
 	return wordDistance
 }
+
+// IsValidParenthesesExpresions validates is a parenthesis expression is valid
+func IsValidParenthesesExpresions(expresion []string) bool {
+	var stack1 *StackArray = new(StackArray)
+	stack1 = stack1.Init(uint(len(expresion)))
+	var stack2 *StackArray = new(StackArray)
+	stack2 = stack2.Init(uint(len(expresion)))
+	var isValid bool = true
+
+	for _, value := range expresion {
+		stack1.Push(value)
+	}
+
+	for !stack1.isEmpty() {
+		parenthesis := stack1.Pop()
+
+		if parenthesis == ")" {
+			stack2.Push(parenthesis)
+		} else {
+			if stack2.isEmpty() {
+				isValid = false
+				break
+			} else {
+				stack2.Pop()
+			}
+		}
+	}
+
+	return isValid
+}
