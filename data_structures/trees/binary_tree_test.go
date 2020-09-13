@@ -1,6 +1,8 @@
 package trees
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestBST(t *testing.T) {
 	// Arrange
@@ -60,4 +62,20 @@ func TestIfTwoTreesAreEqual(t *testing.T) {
 	if areTreesEqual != true {
 		t.Error("Trees must be equal")
 	}
+}
+
+func TestPrintByLevel(t *testing.T) {
+	// Arrange
+	var testBST BST
+	testBST.Insert(8)
+	testBST.Insert(5)
+	testBST.Insert(10)
+	testBST.Insert(9)
+	testBST.Insert(11)
+	testBST.Insert(5)
+	testBST.Insert(4)
+	testBST.Insert(6)
+
+	// Act
+	testBST.PrintByLevel(3)
 }

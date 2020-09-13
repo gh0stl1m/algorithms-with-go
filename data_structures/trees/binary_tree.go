@@ -126,6 +126,31 @@ func AreMirror(tree1, tree2 *BST) bool {
 	return reflect.DeepEqual(nodesArr1, nodesArr2)
 }
 
+// Problem: Print a binary tree level by level
+
+// PrintByLevel Given a binary tree the function print it by level
+func (bst *BST) PrintByLevel(level int) {
+	for i := 1; i <= level; i++ {
+		printGivenLevel(bst.Root, i)
+		fmt.Println()
+	}
+}
+
+func printGivenLevel(node *Node, level int) {
+	if node == nil {
+		return
+	}
+
+	if level == 1 {
+		fmt.Print(" ", node.Value)
+	}
+
+	if level > 1 {
+		printGivenLevel(node.Left, level-1)
+		printGivenLevel(node.Right, level-1)
+	}
+}
+
 func treeMirrorCheckerRight(currentNode *Node, treeArr *[]int) {
 	if currentNode == nil {
 		return
