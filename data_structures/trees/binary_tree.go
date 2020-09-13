@@ -2,6 +2,7 @@ package trees
 
 import (
 	"fmt"
+	"reflect"
 )
 
 // Node define the base structure
@@ -110,6 +111,39 @@ func AreEqual(tree1, tree2 *BST) bool {
 	}
 
 	return areTreesEqual
+}
+
+// Problem: Check if two trees are mirror
+
+// AreMirror Check if two trees are mirror
+func AreMirror(tree1, tree2 *BST) bool {
+	var nodesArr1 []int
+	var nodesArr2 []int
+
+	treeMirrorCheckerRight(tree1.Root, &nodesArr1)
+	treeMirrorCheckerLeft(tree2.Root, &nodesArr2)
+
+	return reflect.DeepEqual(nodesArr1, nodesArr2)
+}
+
+func treeMirrorCheckerRight(currentNode *Node, treeArr *[]int) {
+	if currentNode == nil {
+		return
+	}
+
+	treeMirrorCheckerRight(currentNode.Right, treeArr)
+	*treeArr = append(*treeArr, currentNode.Value)
+	treeMirrorCheckerRight(currentNode.Left, treeArr)
+}
+
+func treeMirrorCheckerLeft(currentNode *Node, treeArr *[]int) {
+	if currentNode == nil {
+		return
+	}
+
+	treeMirrorCheckerLeft(currentNode.Left, treeArr)
+	*treeArr = append(*treeArr, currentNode.Value)
+	treeMirrorCheckerLeft(currentNode.Right, treeArr)
 }
 
 func treeChecker(currentNode *Node, nodes *map[int]int) {
