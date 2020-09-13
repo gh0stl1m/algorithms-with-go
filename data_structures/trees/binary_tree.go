@@ -92,6 +92,35 @@ func (bst *BST) FindSteps(nodeValue1, nodeValue2 int) int {
 	return steps
 }
 
+// Problem: Check if two trees are equal
+
+// AreEqual check if two trees are equal
+func AreEqual(tree1, tree2 *BST) bool {
+	var areTreesEqual bool = true
+	var nodesMap map[int]int = make(map[int]int)
+
+	treeChecker(tree1.Root, &nodesMap)
+	treeChecker(tree2.Root, &nodesMap)
+
+	for _, value := range nodesMap {
+		if value != 2 {
+			areTreesEqual = false
+			break
+		}
+	}
+
+	return areTreesEqual
+}
+
+func treeChecker(currentNode *Node, nodes *map[int]int) {
+	if currentNode == nil {
+		return
+	}
+	treeChecker(currentNode.Right, nodes)
+	(*nodes)[currentNode.Value]++
+	treeChecker(currentNode.Left, nodes)
+}
+
 func findPath(searchValue int, steps *int, visitedNodes *[]int, currentNode *Node) {
 	if !contains(currentNode.Value, *visitedNodes) {
 		*steps++
