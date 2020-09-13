@@ -1,6 +1,8 @@
 package trees
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Node define the base structure
 type Node struct {
@@ -73,4 +75,47 @@ func (bst *BST) findNode(node *Node, value int) *Node {
 	}
 
 	return bst.findNode(node.Right, value)
+}
+
+// Problem: Find the number of steps between two nodes
+
+// FindSteps retrieves the number of steps that are between two nodes
+func (bst *BST) FindSteps(nodeValue1, nodeValue2 int) int {
+	var steps int = 0
+	var nodesVisited []int
+
+	findPath(nodeValue1, &steps, &nodesVisited, bst.Root)
+	findPath(nodeValue2, &steps, &nodesVisited, bst.Root)
+
+	fmt.Println("Nodes visited: ", nodesVisited)
+
+	return steps
+}
+
+func findPath(searchValue int, steps *int, visitedNodes *[]int, currentNode *Node) {
+	if !contains(currentNode.Value, *visitedNodes) {
+		*steps++
+		*visitedNodes = append(*visitedNodes, currentNode.Value)
+	} else {
+		*steps--
+	}
+
+	if currentNode.Value == searchValue {
+		return
+	}
+
+	if searchValue > currentNode.Value {
+		findPath(searchValue, steps, visitedNodes, currentNode.Right)
+	} else {
+		findPath(searchValue, steps, visitedNodes, currentNode.Left)
+	}
+}
+
+func contains(key int, source []int) bool {
+	for _, value := range source {
+		if key == value {
+			return true
+		}
+	}
+	return false
 }
